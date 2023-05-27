@@ -3,9 +3,9 @@ import 'package:abotoapp/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 
 Map<String, Widget Function(BuildContext)> appRoutes = {
-  // '/': (context) => const WelcomeSplash(),
-  // '/dashboard': (context) => const Dashboard()
+  '/': (context) => const WelcomeSplash(),
+  '/dashboard': (context) => const Dashboard()
 
   //experiment
-  '/': (context) => const Dashboard()
+  // '/': (context) => const Dashboard()
 };

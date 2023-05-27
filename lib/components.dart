@@ -13,8 +13,10 @@ class LectureUI extends StatelessWidget {
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(10)),
-      width: 181,
-      margin: const EdgeInsets.only(right: 10),
+
+      width: MediaQuery.of(context).size.width * 0.45,
+
+      // margin: const EdgeInsets.only(right: 10),
       child: Padding(
           padding: const EdgeInsets.all(9),
           child: Column(
