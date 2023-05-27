@@ -51,3 +51,38 @@ class LectureUI extends StatelessWidget {
     );
   }
 }
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black,
+            blurRadius: 4,
+            offset: Offset(4, 8),
+          ),
+        ],
+      ),
+      margin: const EdgeInsets.only(top: 13),
+      child: const TextField(
+        style: TextStyle(fontSize: 19),
+        decoration: InputDecoration(
+            // icon: Icon(FontAwesomeIcons.magnifyingGlass),
+
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            hintText: 'Search for lecture',
+            fillColor: Colors.white),
+      ),
+    );
+  }
+}
