@@ -1,9 +1,12 @@
 import 'package:abotoapp/components.dart';
+import 'package:abotoapp/shared/audio_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class MainScroll extends StatefulWidget {
-  const MainScroll({super.key});
+  final Function action;
+  const MainScroll({super.key, required this.action});
 
   @override
   State<MainScroll> createState() => _MainScrollState();
@@ -19,6 +22,7 @@ class _MainScrollState extends State<MainScroll> {
 
   @override
   Widget build(BuildContext context) {
+    mainPlayLecture(context);
     return Stack(
       children: [
         TopHeader(animOpacity: opacity),
@@ -26,7 +30,6 @@ class _MainScrollState extends State<MainScroll> {
             animOpacity: 1.0 - opacity), //on scroll alternative on scroll
         NotificationListener<DraggableScrollableNotification>(
           onNotification: (notification) {
-            // print();
             setState(() {
               opacity = 1.0 -
                   ((notification.extent - 0.8) / (0.9 - 0.8)) * (1.0 - 0.0);
@@ -52,7 +55,7 @@ class _MainScrollState extends State<MainScroll> {
                         const Biography(),
                         Lectures(
                           title: "All Lectures",
-                          action: () => {},
+                          action: () => widget.action(),
                           isAction: true,
                         ),
                         Lectures(
@@ -84,7 +87,7 @@ class Lectures extends StatelessWidget {
       return Container(
         margin: const EdgeInsets.only(top: 10),
         child: ElevatedButton(
-            onPressed: () => action,
+            onPressed: () => action(),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -116,12 +119,11 @@ class Lectures extends StatelessWidget {
                 )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                LectureUI(
-                  title: "Ifaseyin Ilekewu Ati Majemu",
-                  timing: "2hr 4sec",
-                ),
-                LectureUI(title: "Titobi Olohun", timing: "2hr 4sec")
+              children: [
+                lectureUIMain(context, 'Ifaseyin Ilekewu Ati Majemu',
+                    '2hr 2sec', '/lecturePlay'),
+                lectureUIMain(
+                    context, 'Titobi Olohun', '1hr 2sec', '/lecturePlay')
               ],
             ),
             checkAction(context)
@@ -166,7 +168,8 @@ class Biography extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(top: 10),
                     child: ElevatedButton(
-                        onPressed: () => {print('ddd')},
+                        onPressed: () =>
+                            {Navigator.pushNamed(context, '/profile')},
                         child: Text("View Profile",
                             style: Theme.of(context).textTheme.bodyMedium)))
               ],
@@ -242,7 +245,7 @@ class TopHeader extends StatelessWidget {
               color: Theme.of(context).colorScheme.onBackground, size: 20)
         ],
       ),
-      const SearchBar()
+      const SearchBarNav()
     ];
   }
 
@@ -297,4 +300,10 @@ class HeaderTemplate extends StatelessWidget {
       ],
     );
   }
+}
+
+void mainPlayLecture(BuildContext context) async {
+  final lectureAudioProvider = Provider.of<AudioProvider>(context);
+  await lectureAudioProvider.loadAllLectures();
+  // lectureAudioProvider.playLecture();
 }

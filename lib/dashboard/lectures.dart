@@ -1,70 +1,111 @@
-import 'package:abotoapp/shared/bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:abotoapp/components.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AllLectures extends StatelessWidget {
+class AllLectures extends StatefulWidget {
   const AllLectures({super.key});
+
+  @override
+  State<AllLectures> createState() => _AllLecturesState();
+}
+
+class _AllLecturesState extends State<AllLectures> {
+  late Map<int, String> lectures;
+
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      lectures = {1: 'Lecture', 2: 'Our Lecture'};
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const BottomNav(index: 1),
-      appBar: AppBar(
-          title: const Text("All Lectures"),
-          backgroundColor: Theme.of(context).colorScheme.background),
-      body: Stack(
-        children: [
-          const SearchBar(),
-          Container(
-            margin: EdgeInsets.only(top: 70, right: 10, left: 10),
-            child: ListView(
-              children: [
-                lectureUIComponent(context),
-                lectureUIComponent(context),
-                lectureUIComponent(context),
-                lectureUIComponent(context),
-                lectureUIComponent(context),
-                lectureUIComponent(context)
-              ],
+        appBar: AppBar(
+            title: const Align(
+                alignment: Alignment.centerLeft, child: Text("All Lectures")),
+            leading: null,
+            backgroundColor: Theme.of(context).colorScheme.background),
+        body: Stack(
+          children: [
+            Padding(
+                padding: EdgeInsets.only(right: 8.0, left: 8.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 15,
+                        offset: Offset(1, 1),
+                      ),
+                    ],
+                  ),
+                  margin: const EdgeInsets.only(top: 15),
+                  child: TextField(
+                    onChanged: (value) {
+                      print(value);
+                    },
+                    style: const TextStyle(fontSize: 19),
+                    decoration: const InputDecoration(
+                        // icon: Icon(FontAwesomeIcons.magnifyingGlass),
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        prefixIcon:
+                            Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        hintText: 'Search for lecture',
+                        fillColor: Colors.white),
+                  ),
+                )),
+            Container(
+              margin: const EdgeInsets.only(top: 100, right: 10, left: 10),
+              // child: ListView.separated(
+              //   itemCount: listOfLectures(context).length,
+              //   separatorBuilder: (context, index) {
+              //     return Divider(
+              //       color: Theme.of(context).primaryColor,
+              //     );
+              //   },
+              //   itemBuilder: (context, index) {
+              //     return listOfLectures(context)[index];
+              //   },
+              // ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }
 
-Widget lectureUIComponent(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 28),
-    child: Row(
-      children: [
-        const Icon(FontAwesomeIcons.play, color: Colors.black54, size: 25),
-        Expanded(
-          flex: 1,
-          child: Padding(
-            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('New Light new Light Coarse New Light',
-                    maxLines: 1,
-                    softWrap: false,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.black87, fontWeight: FontWeight.bold)),
-                Text(
-                  '1hr 2sec',
-                  style: TextStyle(color: Colors.black54, fontSize: 18),
-                )
-              ],
-            ),
-          ),
-        ),
-        const Icon(FontAwesomeIcons.chevronRight)
-      ],
-    ),
-  );
+List<Widget> listOfLectures(BuildContext context, lists) {
+  List<Widget> accList = [];
+
+  for (var element in lists) {
+    accList.add(lectureUIComponent(context, '/lecturePlay',
+        ['New Light new Light Upon Light', '1hr 2sec']));
+  }
+  return [
+    lectureUIComponent(context, '/lecturePlay',
+        ['New Light new Light Upon Light', '1hr 2sec']),
+    lectureUIComponent(
+        context, '/lecturePlay', ['Awon Iwo Musulimu', '1hr 2sec']),
+    lectureUIComponent(
+        context, '/lecturePlay', ['Kinni Ola Albarika Eda', '1hr 2sec']),
+    lectureUIComponent(
+        context, '/lecturePlay', ['Tani o ni igberega', '1hr 2sec']),
+    lectureUIComponent(context, '/lecturePlay',
+        ['Oro Anobi Ki oto ku ati ife sile re', '1hr 2sec']),
+    lectureUIComponent(context, '/lecturePlay',
+        ['New Light new Light Upon Light', '1hr 2sec']),
+  ];
 }

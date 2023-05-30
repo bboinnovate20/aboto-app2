@@ -1,10 +1,13 @@
+import 'package:abotoapp/shared/audio_provider.dart';
 import 'package:abotoapp/welcome/welcome.dart';
 import 'package:abotoapp/route.dart';
 import 'package:abotoapp/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const Main());
+  runApp(ChangeNotifierProvider(
+      create: (context) => AudioProvider(), child: const Main()));
 }
 
 class Main extends StatelessWidget {
