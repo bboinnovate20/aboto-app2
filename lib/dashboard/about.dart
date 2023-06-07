@@ -24,7 +24,7 @@ class About extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: Text(
-                "This is Late Alhaji Aboto App, developed by one of the fan, if there is any suggested, you can reach out to me :)",
+                "This is Late Alhaji Aboto App, developed by one of the fan, if there is any suggested, you can reach out to me 🤗",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 30),
               ),

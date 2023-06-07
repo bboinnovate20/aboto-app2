@@ -9,9 +9,9 @@ Map<String, Widget Function(BuildContext)> appRoutes = {
   // '/dashboard': (context) => const Dashboard()
 
   //experiment
-  '/': (context) => const Dashboard(),
-  // '/lecturePlay': (context) => const LecturePlaying(),
-  // '/profile': (context) => const ProfileAboto()
+  '/': (context) => const DashboardMain(),
+  '/lecturePlay': (context) => const LecturePlaying(),
+  '/profile': (context) => const ProfileAboto()
   // '/': (context) => const ProfileAboto()
   // '/': (context) => const AllLectures()
 

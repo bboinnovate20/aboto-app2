@@ -39,6 +39,11 @@ dependencies:
   google_nav_bar: ^5.0.6
   provider: ^6.0.5
   just_audio: ^0.9.33
+  flutter_advanced_seekbar: ^0.0.2
+  audio_service: ^0.18.10
+  get_it: ^7.6.0
+  flutter_secure_storage: ^8.0.0
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:
